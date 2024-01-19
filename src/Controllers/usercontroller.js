@@ -4,7 +4,7 @@ const sign = require('../Helpers/jwt')
 
 
 class UserController {
-  static async register (req, res) {
+  static async register(req, res) {
     try {
       const password = req.body.password
       const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
@@ -30,7 +30,7 @@ class UserController {
     }
   }
 
-  static async login (req, res) {
+  static async login(req, res) {
     try {
       const user = await User.findOne({ email: req.body.email })
       if (!user)
@@ -43,7 +43,14 @@ class UserController {
       // }
       return res.status(200).json({
         message: 'Successfully Logged In',
-        data: user,
+        data: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+          phoneNumber: user.phoneNumber,
+          isActive: user.isActive
+        },
         token: accessToken
       })
     } catch (error) {
@@ -51,7 +58,7 @@ class UserController {
     }
   }
 
-  static async getUserById (req, res) {
+  static async getUserById(req, res) {
     try {
       const user = await User.findById(req.params.id)
       if (!user) return res.status(404).json({ message: 'User not found' })
@@ -61,7 +68,7 @@ class UserController {
     }
   }
 
-  static async updateUserById (req, res) {
+  static async updateUserById(req, res) {
     try {
       const user = await User.findByIdAndUpdate(
         req.params.id,
@@ -82,7 +89,7 @@ class UserController {
     }
   }
 
-  static async deleteUserById (req, res) {
+  static async deleteUserById(req, res) {
     try {
       const user = await User.findByIdAndDelete(req.params.id)
       if (!user) {
@@ -92,9 +99,9 @@ class UserController {
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
-  }3
+  } 3
 
-  static async getAllUsers (req, res) {
+  static async getAllUsers(req, res) {
     try {
       const users = await User.find()
       return res
@@ -105,7 +112,7 @@ class UserController {
       return res.status(500).json({ message: error.message })
     }
   }
-  static async deactivateUser (req, res) {
+  static async deactivateUser(req, res) {
     try {
       const user = await User.findById(req.params.id)
       if (!user) {
