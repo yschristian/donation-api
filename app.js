@@ -1,10 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const cors = require('cors')
 const useroutes = require('./src/Routers/user')
 const kidsroutes = require('./src/Routers/kid')
-const connectDB = require('./src/db/connect')
+
+
 const app = express()
+app.use(cors())
 app.use(express.json())
 dotenv.config()
 

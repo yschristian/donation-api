@@ -10,7 +10,6 @@ const kidSchema = new mongoose.Schema(
     },
     dascription: {
       type: String,
-      unique: true,
     },
     dateOfBirth: {
       type: String,
