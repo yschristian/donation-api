@@ -43,8 +43,22 @@ const getKidById = async (req, res) => {
     }
 }
 
+const removeKid = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const kid = await Kid.findByIdAndDelete(id);
+        if(kid){
+            return res.status(200).json({ message: "Kid deleted successfully" });
+        }
+        throw new Error("Kid not found");
+    }catch(error){
+        return res.status(500).send(error.message);
+    }
+}
+
 module.exports={
     createKid,
     getAllKids,
-    getKidById
+    getKidById,
+    removeKid
 }

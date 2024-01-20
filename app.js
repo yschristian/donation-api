@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const useroutes = require('./src/Routers/user')
 const kidsroutes = require('./src/Routers/kid')
+const donationroutes = require('./src/Routers/donation')
 
 
 const app = express()
@@ -13,6 +14,7 @@ dotenv.config()
 
 app.use('/users', useroutes)
 app.use('/kids', kidsroutes)
+app.use("/donations",donationroutes)
 
 const port = process.env.PORT || 3000;
 
