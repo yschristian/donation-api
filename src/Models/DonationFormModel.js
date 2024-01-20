@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const DonationSchema = new mongoose.Schema(
   {
     kidId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Kid'
     },
     FullNames: {
       type: String,

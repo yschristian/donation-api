@@ -15,7 +15,7 @@ const createDonation = async (req, res) => {
 
 const  getAllDonations = async (req, res) => {
     try{
-        const donations = await Donation.find();
+        const donations = await Donation.find().populate('kidId');
         return res.status(200).json({ donations });
     }catch(error){
         console.log(error)
