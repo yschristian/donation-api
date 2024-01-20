@@ -40,4 +40,9 @@ router.put(
   UserController.deactivateUser
 )
 
+router.get(
+  "/length",
+  UserController.getAllUserWithUserRole
+)
+
 module.exports = router
